@@ -90,17 +90,16 @@ app.post('/api/login', (req, res, next) => {
     })(req, res, next);
 });
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 app.post('/api/register', async (req, res) => {
-    console.log('Received register request with body:', req.body);
     const { email, password } = req.body;
-    console.log('Email:', email);
-    console.log('Password:', password);
     try {
-        const user = await User.create({ email, password });
-        console.log('User created:', user);
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const user = await User.create({ email, password: hashedPassword });
         res.json({ success: true });
     } catch (err) {
-        console.error('Error:', err);
         if (err.name === 'SequelizeUniqueConstraintError') {
             res.json({ success: false, message: 'User already exists' });
         } else {
@@ -108,6 +107,25 @@ app.post('/api/register', async (req, res) => {
         }
     }
 });
+
+// app.post('/api/register', async (req, res) => {
+//     console.log('Received register request with body:', req.body);
+//     const { email, password } = req.body;
+//     console.log('Email:', email);
+//     console.log('Password:', password);
+//     try {
+//         const user = await User.create({ email, password });
+//         console.log('User created:', user);
+//         res.json({ success: true });
+//     } catch (err) {
+//         console.error('Error:', err);
+//         if (err.name === 'SequelizeUniqueConstraintError') {
+//             res.json({ success: false, message: 'User already exists' });
+//         } else {
+//             res.json({ success: false, message: 'Error registering user' });
+//         }
+//     }
+// });
 
 app.post('/api/chat', async (req, res) => {
     console.log('Received chat request with body:', req.body);
