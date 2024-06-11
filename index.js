@@ -9,15 +9,18 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { sequelize, User } = require('./db');
+const { sequelize: sequelizeChatbot, Message } = require('./db_chatbot');
 
 const app = express();
 const port = 3000;
+
 
 // Configurar CORS para permitir solicitudes con credenciales desde un origen específico
 app.use(cors({
     origin: 'http://127.0.0.1:5500', // Asegúrate de que esta URL coincida exactamente con el origen de tus solicitudes
     credentials: true
 }));
+
 
 // Middleware
 app.use(bodyParser.json());
@@ -40,28 +43,51 @@ let messages = [
     { role: 'system', content: "Eres un experto en videojuegos." }
 ];
 
-async function open(input) {
-    let userResponce = input;
+async function open(userId, input) {
+    let userResponse = input;
 
-    messages.push({ role: 'user', content: userResponce });
+    // Guardar el mensaje del usuario
+    await Message.create({ userId, role: 'user', content: userResponse });
+
+    messages.push({ role: 'user', content: userResponse });
 
     const completion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: messages
     });
 
-    messages.push({ role: 'assistant', content: completion.choices[0].message.content });
+    const assistantMessage = completion.choices[0].message.content;
+
+    // Guardar el mensaje del asistente
+    await Message.create({ userId, role: 'assistant', content: assistantMessage });
+
+    messages.push({ role: 'assistant', content: assistantMessage });
 
     return messages;
 }
+// async function open(input) {
+//     let userResponce = input;
+
+//     messages.push({ role: 'user', content: userResponce });
+
+//     const completion = await openai.chat.completions.create({
+//         model: "gpt-3.5-turbo",
+//         messages: messages
+//     });
+
+//     messages.push({ role: 'assistant', content: completion.choices[0].message.content });
+
+//     return messages;
+// }
+
 
 // Verificación de conexión a la base de datos y sincronización
 sequelize.authenticate()
     .then(() => {
-        console.log('Connection has been established successfully.');
+        console.log('Connection with user database has been established successfully.');
     })
     .catch(err => {
-        console.error('Unable to connect to the database:', err);
+        console.error('Unable to connect to the user database:', err);
     });
 
 sequelize.sync().then(() => {
@@ -69,6 +95,23 @@ sequelize.sync().then(() => {
 }).catch(err => {
     console.error('Error syncing database', err);
 });
+
+sequelizeChatbot.authenticate()
+    .then(() => {
+        console.log('Chatbot database connection has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the chatbot database:', err);
+    });
+
+sequelizeChatbot.sync()
+    .then(() => {
+        console.log('Chatbot database synced');
+    })
+    .catch(err => {
+        console.error('Error syncing chatbot database', err);
+    });
+
 
 // Authentication routes
 app.post('/api/login', (req, res, next) => {
@@ -124,11 +167,33 @@ app.post('/api/chat', async (req, res) => {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    let response = await open(input);
+    let response = await open(userId, input);
     res.json({
         "Conversation": response
     });
 });
+
+app.get('/api/conversation/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    const messages = await Message.findAll({ where: { userId }, order: [['timestamp', 'ASC']] });
+
+    res.json(messages);
+});
+// app.post('/api/chat', async (req, res) => {
+//     const { userId, input } = req.body;
+
+//     // Verificar que el userId sea válido
+//     const user = await User.findByPk(userId);
+//     if (!user) {
+//         return res.status(401).json({ message: 'Unauthorized' });
+//     }
+
+//     let response = await open(input);
+//     res.json({
+//         "Conversation": response
+//     });
+// });
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/landing.html'));
