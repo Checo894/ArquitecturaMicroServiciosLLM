@@ -74,6 +74,9 @@ function addMessage(message, className) {
     chatBox.appendChild(messageElement);
 }
 
+// Exportar funciones para pruebas
+module.exports = { addMessage, chatBox, userInput, sendButton, logoutButton };
+
 
 // const chatBox = document.getElementById('chat-box');
 // const userInput = document.getElementById('user-input');
@@ -81,11 +84,22 @@ function addMessage(message, className) {
 // const logoutButton = document.getElementById('logout-button');
 
 // // Verificar el ID de usuario al cargar la página
-// document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('DOMContentLoaded', async () => {
 //     const userId = localStorage.getItem('userId');
 //     if (!userId) {
 //         alert('Unauthorized');
 //         window.location.href = 'login.html';
+//     } else {
+//         // Cargar la conversación guardada
+//         try {
+//             const response = await fetch(`http://localhost:3000/api/conversation/${userId}`);
+//             const messages = await response.json();
+//             messages.forEach(message => {
+//                 addMessage(message.content, message.role === 'user' ? 'user-message' : 'bot-message');
+//             });
+//         } catch (error) {
+//             console.error('Error loading conversation:', error);
+//         }
 //     }
 // });
 

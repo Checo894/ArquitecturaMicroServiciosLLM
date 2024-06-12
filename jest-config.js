@@ -1,3 +1,10 @@
+// module.exports = {
+//   testEnvironment: 'jest-environment-jsdom',
+//   testMatch: ['**/tests/**/*.test.js'],
+//   setupFilesAfterEnv: ['<rootDir>/tests/setupTests.js'],
+// };
+
+
 module.exports = {
     testEnvironment: 'jest-environment-jsdom',
     testMatch: ['**/tests/**/*.test.js'],
