@@ -115,7 +115,7 @@ sequelizeChatbot.sync()
 
 // Authentication routes
 app.post('/api/login', (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
+    passport.authenticate('local', (err, user) => {  // se çambio (err, user, info) => { por (err, user) => {
         if (err) { return next(err); }
         if (!user) { 
             return res.status(400).json({ success: false, message: 'Invalid email or password' }); 

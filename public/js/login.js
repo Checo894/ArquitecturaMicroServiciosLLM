@@ -1,8 +1,8 @@
-document.getElementById('login-button').addEventListener('click', function(event) {
+document.getElementById('login-button').addEventListener('click', function() { // cambio de function(event) a function()
     handleAuth('login');
 });
 
-document.getElementById('register-button').addEventListener('click', function(event) {
+document.getElementById('register-button').addEventListener('click', function() { // cambio de function(event) a function()
     handleAuth('register');
 });
 
