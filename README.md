@@ -169,8 +169,7 @@ Antes, asegurate de haber instalado y que se encuentre en ejecución la aplicaci
 
 `docker-compose up`
 
-- Acceder a los Servicios:
+Y finalmente, en la aplicación de escritorio, en el apartado de 'containers' se debería apreciar algo como lo siguiente, dos servicios y dos bases de datos presentes:
 
-Servicio de Autenticación: `http://localhost:3000`
+![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/ebc187e3-caf5-4d26-9e3b-9047307827a2)
 
-Servicio de Chat: `http://localhost:3001`
