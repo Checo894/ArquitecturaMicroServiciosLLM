@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -25,10 +26,14 @@
     "util": "^0.12.5"
   },
   "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "eslint": "^9.4.0",
     "fetch-mock": "^9.11.0",
+    "globals": "^15.4.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
-    "jsdom": "^24.1.0"
+    "jsdom": "^24.1.0",
+    "supertest": "^7.0.0"
   }
 }

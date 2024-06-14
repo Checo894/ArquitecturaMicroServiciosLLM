@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  db_user:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: llm
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_user_data:/var/lib/mysql
+
+  db_chatbot:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: chatbot_messages
+    ports:
+      - "3308:3306"
+    volumes:
+      - db_chatbot_data:/var/lib/mysql
+
+  auth:
+    build:
+      context: .
+      dockerfile: auth/Dockerfile
+    environment:
+      - MYSQL_HOST_USER=db_user
+      - MYSQL_DATABASE_USER=llm
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=
+    depends_on:
+      - db_user
+    ports:
+      - "3001:3000"
+
+  chat:
+    build:
+      context: .
+      dockerfile: chat/Dockerfile
+    environment:
+      - MYSQL_HOST_CHATBOT=db_chatbot
+      - MYSQL_DATABASE_CHATBOT=chatbot_messages
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - db_chatbot
+    ports:
+      - "3002:3000"
+
+volumes:
+  db_user_data:
+  db_chatbot_data:
