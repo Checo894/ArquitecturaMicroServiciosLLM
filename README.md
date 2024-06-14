@@ -157,7 +157,7 @@ Como ya se había comentado al inicio de este README, Docker es una plataforma q
 
 En este proyecto se crearon distintos `Dockerfile`´s para contenerizar diferentes partes de la aplicación, siendo los servicios de autenticación y chatbot, así como sus respectivas bases de datos de MySQL. Un Dockerfile es un script que contiene una serie de instrucciones para crear una imagen de Docker. Posteriormente, estos Dockers se unen con un archivo `docker-compose.yml` que ayuda a definir y ejecutar múltiples contenedores Docker, es decir, facilita la orquestación de los contenedores para que trabajen juntos.
 
-### Ejecutar el Proyecto con Docker
+### Ejecutar Docker
 
 Antes, asegurate de haber instalado y que se encuentre en ejecución la aplicación de Docker Desktop en tu dispositivo localmente.
 
