@@ -149,4 +149,28 @@ Durante la ejecución de estas pruebas en el desarrollo del proyecto, estas nos 
 
 ![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/c6413ab6-0248-46d7-805a-f483d142e67e)
 
+## Docker
 
+Como ya se había comentado al inicio de este README, Docker es una plataforma que permite crear, desplegar y ejecutar aplicaciones en contenedores. Los contenedores son ligeros, portátiles y aseguran que la aplicación funcione de manera consistente en diferentes entornos. Asimismo, esta plataforma ayuda a mantener la consistencia, el aislamiento, la escalabilidad y la portabilidad del programa.
+
+### Implementación
+
+En este proyecto se crearon distintos `Dockerfile`´s para contenerizar diferentes partes de la aplicación, siendo los servicios de autenticación y chatbot, así como sus respectivas bases de datos de MySQL. Un Dockerfile es un script que contiene una serie de instrucciones para crear una imagen de Docker. Posteriormente, estos Dockers se unen con un archivo `docker-compose.yml` que ayuda a definir y ejecutar múltiples contenedores Docker, es decir, facilita la orquestación de los contenedores para que trabajen juntos.
+
+### Ejecutar el Proyecto con Docker
+
+Antes, asegurate de haber instalado y que se encuentre en ejecución la aplicación de Docker Desktop en tu dispositivo localmente.
+
+- Construir las Imágenes:
+
+`docker-compose build`
+
+- Levantar los Contenedores:
+
+`docker-compose up`
+
+- Acceder a los Servicios:
+
+Servicio de Autenticación: `http://localhost:3000`
+
+Servicio de Chat: `http://localhost:3001`
