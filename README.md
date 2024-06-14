@@ -121,6 +121,8 @@ Utilizamos Jest como framework de pruebas unitarias, conocido por su simplicidad
 
 ![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/5e99685d-09f5-4deb-9b59-06269829fabd)
 
+NOTA: Al momento de correr estas pruebas, tambien se recurren y utilizan a las bases de datos, por lo que el sistema limpia las tablas y establece sus propios registros. 
+
 ## Pruebas Estáticas
 
 Las pruebas estáticas son un conjunto de técnicas que se utilizan para analizar el código fuente de un programa sin ejecutarlo. Su objetivo es identificar posibles errores, malas prácticas y problemas de estilo en el código. Estas pruebas ayudan a mantener la calidad del código y a detectar problemas potenciales de manera temprana.
@@ -171,5 +173,4 @@ Antes, asegurate de haber instalado y que se encuentre en ejecución la aplicaci
 
 Y finalmente, en la aplicación de escritorio, en el apartado de 'containers' se debería apreciar algo como lo siguiente, dos servicios y dos bases de datos presentes:
 
-![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/ebc187e3-caf5-4d26-9e3b-9047307827a2)
-
+![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/31ebe5c2-9b8f-4b4c-8756-2708eb665097)
