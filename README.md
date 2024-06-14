@@ -64,3 +64,61 @@ Una vez creadas, en la barra superior seleccionamos "Importar" y seleccionamos e
 Por último, damos en "Importar" al final de la página.
 
 ![image](https://github.com/pizzerolaa/Aplicacion-MVC/assets/128638772/a1fc1d23-d6eb-4cd7-8a24-b64d7571ba54)
+
+### Correr localmente la aplicación
+
+Completo lo anterior, en la terminal de tu preferencia ubícate en la carpeta fuente del repositorio clonado y ejecuta los siguientes comandos:
+
+- `npm i`: Instala las dependencias del proyecto.
+
+- `npm start`: Inicia el servidor de Express.
+
+Terminado esto, la página estará lista para su uso y se encontrará alojada en `http://localhost:3000/landing.html`
+
+## HAPPY PATH
+
+A continuación, se muestra una guía rápida donde se exponen las distintas páginas y funcionalidades de la aplicación.
+
+### Landing Page
+
+![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/22788d0b-a1f5-46f3-9332-96a075e4e706)
+
+En esta primera vista, la página nos da una bienvenida y nos da un poco de contexto de qué trata esta herramienta.
+
+### Login Page
+
+![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/35852a6a-b715-44e7-9910-1d22b5c77501)
+
+Posteriormente, podemos encontrar la plataforma conde podremos iniciar sesión en la aplicación con nuestro usuario y contraseña y, en caso de no contar con uno, registrarnos; paso necesario para poder hacer uso de la misma.
+
+### Chat Bot Page
+
+![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/1a298922-f4b2-46f0-bb60-6ad7c8d3b4a4)
+
+Finalmente, llegamos a la funcionalidad principal de la página, la interface de chat con la inteligencia artificial. Con esta podrás interactuar y mantener conversaciones con ella y, cuando hayas terminado, cerrar sesión, guardando así tus mensajes para otra ocación. 
+
+De esta forma, si otro usuario inicia sesión con otra cuenta, podrá tener su propia conversación que se conservará por separado y volver a ella reingresando a la app.
+
+## Pruebas Unitarias
+
+Las pruebas unitarias son un tipo de pruebas de software que se centran en verificar el correcto funcionamiento de las unidades más pequeñas e independientes de código, como funciones o métodos. El objetivo es asegurarse de que cada componente individual de la aplicación funcione correctamente y de manera aislada. Estas pruebas se ejecutan generalmente de manera automática y proporcionan una manera rápida de validar que el código funciona como se espera, lo cual es esencial para el mantenimiento y evolución del software.
+
+### Ejecutables
+
+En este proyecto, cada archivo de prueba se corresponde con un archivo de código fuente, lo que facilita la localización y mantenimiento de las pruebas; estos inluyen:
+
+- `db.test.js`: Pruebas para verificar la correcta conexión y operación de la base de datos de usuarios.
+- `db_chatbot.test.js`: Pruebas para verificar la correcta conexión y operación de la base de datos del chatbot.
+- `index.test.js`: Pruebas para verificar la funcionalidad del archivo principal de la aplicación.
+- `login.test.js`: Pruebas para la funcionalidad de inicio de sesión.
+- `script.test.js`: Pruebas para la funcionalidad de los scripts utilizados en la aplicación.
+
+Todos los cuales se encuentran dentro de la carpeta `tests` en la fuente del repositorio.
+
+### Framework de Pruebas
+
+Utilizamos Jest como framework de pruebas unitarias, conocido por su simplicidad y capacidad de realizar pruebas de manera rápida y eficaz; configurado en el archivo `jest-config.js`. Para correr toda la suite de  pruebas unitarias del proyecto se utiliza el comando `npm test`, siendo un ejemplo de éxito el siguiente:
+
+![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/5e99685d-09f5-4deb-9b59-06269829fabd)
+
+
