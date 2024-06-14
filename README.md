@@ -103,7 +103,7 @@ De esta forma, si otro usuario inicia sesión con otra cuenta, podrá tener su p
 
 Las pruebas unitarias son un tipo de pruebas de software que se centran en verificar el correcto funcionamiento de las unidades más pequeñas e independientes de código, como funciones o métodos. El objetivo es asegurarse de que cada componente individual de la aplicación funcione correctamente y de manera aislada. Estas pruebas se ejecutan generalmente de manera automática y proporcionan una manera rápida de validar que el código funciona como se espera, lo cual es esencial para el mantenimiento y evolución del software.
 
-### Ejecutables
+### Archivos
 
 En este proyecto, cada archivo de prueba se corresponde con un archivo de código fuente, lo que facilita la localización y mantenimiento de las pruebas; estos inluyen:
 
@@ -115,10 +115,38 @@ En este proyecto, cada archivo de prueba se corresponde con un archivo de códig
 
 Todos los cuales se encuentran dentro de la carpeta `tests` en la fuente del repositorio.
 
-### Framework de Pruebas
+### Framework de Pruebas Unitarias
 
 Utilizamos Jest como framework de pruebas unitarias, conocido por su simplicidad y capacidad de realizar pruebas de manera rápida y eficaz; configurado en el archivo `jest-config.js`. Para correr toda la suite de  pruebas unitarias del proyecto se utiliza el comando `npm test`, siendo un ejemplo de éxito el siguiente:
 
 ![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/5e99685d-09f5-4deb-9b59-06269829fabd)
+
+## Pruebas Estáticas
+
+Las pruebas estáticas son un conjunto de técnicas que se utilizan para analizar el código fuente de un programa sin ejecutarlo. Su objetivo es identificar posibles errores, malas prácticas y problemas de estilo en el código. Estas pruebas ayudan a mantener la calidad del código y a detectar problemas potenciales de manera temprana.
+
+### Framework de Pruebas Estáticas
+
+La implementación de las pruebas estáticas en este proyecto se hizo utilizando ESLint, que es una herramienta popular para el análisis estático de código en JavaScript; nos permite definir reglas para el estilo y las mejores prácticas del código, y verifica que el código cumpla con estas reglas. En este caso, las pruebas se tienen que correr por comandos individuales para cada uno de las arcivos de código fuente, con el prefijo `npx eslint + [nombre_del_archivo]`, como se muestra a continuación:
+
+- `npx eslint db.js`
+- `npx eslint db_chatbot.js`
+- `npx eslint index.js`
+- `npx eslint .\public\js\login.js`
+- `npx eslint .\public\js\script.js`
+
+Siendo un resultado exitoso de estas el hecho de que la terminal no regrese ningún output.
+
+### Ejemplo real de corrección
+
+Durante la ejecución de estas pruebas en el desarrollo del proyecto, estas nos ayudaron a detectar variables inutilizadas en `index.js` y `login.js` mostrando el siguiente output en aquel momento...
+
+- `npx eslint index.js`:
+
+![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/6a2f9bc9-2d02-4540-9d71-95ade7fea192)
+
+- `npx eslint .\public\js\login.js`:
+
+![image](https://github.com/Checo894/ArquitecturaMicroServiciosLLM/assets/128638772/c6413ab6-0248-46d7-805a-f483d142e67e)
 
 
